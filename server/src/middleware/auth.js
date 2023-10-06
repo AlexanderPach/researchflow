@@ -20,7 +20,6 @@ const verifyToken = asyncHandler(async (req, res, next) => {
 
         req.user = await User.findById(verifyUserToken.userId).select('-password');
 
-
         next();
 
     } catch (e) {

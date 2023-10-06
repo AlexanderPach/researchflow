@@ -78,6 +78,7 @@ exports.createUsers = asyncHandler(async (req, res) => {
         username,
         email,
         password: hashedPassword,
+        dateCreated: Date.now(),
     });
 
     res.status(201).json({
@@ -86,6 +87,7 @@ exports.createUsers = asyncHandler(async (req, res) => {
         email: newUser.email,
         username: newUser.email,
         password: newUser.password,
+        dateCreated: newUser.dateCreated,
 
         })
     
@@ -112,3 +114,27 @@ exports.loginUser = asyncHandler(async (req, res) => {
         })
     }
 });
+
+exports.updateUser = asyncHandler(async (req, res) => {
+    const { userId, name, username } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        res.status(404);
+        throw new Error('User Properties Not Retrieved');
+    }
+
+    if (name) {
+        user.name = name;
+    }
+
+    if (username) {
+        user.username = username;
+    }
+    
+    await user.save();
+
+    res.status(200).json({ message: 'User Updated Successfully' , user })
+})
+

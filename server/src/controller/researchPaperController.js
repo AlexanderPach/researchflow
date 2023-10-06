@@ -28,3 +28,7 @@ exports.createResearchPaper = async (req, res) => {
     })
 
 }
+
+exports.deleteResearchPaper = async (req, res) => {
+    
+}

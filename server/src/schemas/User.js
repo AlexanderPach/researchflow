@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const ResearchPaper = require('./ResearchPaper');
 const { Schema } = mongoose;
 
 const User = new Schema({
@@ -21,6 +22,12 @@ const User = new Schema({
     },
     dateCreated: Date,
     lastLogin: Date,
+    documents: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: ResearchPaper
+        }
+    ]
 
 })
 
